@@ -57,3 +57,6 @@ b. Code for the core objects and the skeleton structures
 c. Write the implementations
 
 d. Write Junit
+
+## References
+https://github.com/donnemartin/system-design-primer#object-oriented-design-interview-questions-with-solutions
