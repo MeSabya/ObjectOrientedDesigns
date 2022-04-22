@@ -225,6 +225,10 @@ if __name__ == '__main__':
 
 ```
 
+## References:
+
+1. https://www.pythontutorial.net/python-oop/python-open-closed-principle/
+2. https://medium.com/@vubon.roy/solid-principles-with-python-examples-10e1f3d91259
 
 
 
