@@ -225,6 +225,84 @@ if __name__ == '__main__':
 
 ```
 
+## Dependency Inversion Principle
+
+The dependency inversion principle states that:
+
+*High-level modules should not depend on the low-level modules. Both should depend on abstractions
+Abstractions should not depend on details. Details should depend on abstractions.*
+
+```python
+class FXConverter:
+    def convert(self, from_currency, to_currency, amount):
+        print(f'{amount} {from_currency} = {amount * 1.2} {to_currency}')
+        return amount * 1.2
+
+
+class App:
+    def start(self):
+        converter = FXConverter()
+        converter.convert('EUR', 'USD', 100)
+
+
+if __name__ == '__main__':
+    app = App()
+    app.start()
+```
+👉 The dependency inversion principle aims to reduce the coupling between classes by creating an abstraction layer between them.
+
+The App is a high-level module. However, The App depends heavily on the FXConverter class that is dependent on the FX’s API.
+
+![image](https://user-images.githubusercontent.com/33947539/164886649-8e92c3ec-4656-4b8f-953c-da4cad670f59.png)
+
+In the future, if the FX’s API changes, it’ll break the code. Also, if you want to use a different API, you’ll need to change the App class.
+
+To prevent this, you need to invert the dependency so that the FXConverter class needs to adapt to the App class.
+
+![image](https://user-images.githubusercontent.com/33947539/164886670-5ab6699d-cc42-4e8c-9c2b-7e811da153a3.png)
+
+To do that, you define an interface and make the App dependent on it instead of FXConverter class. And then you change the FXConverter to comply with the interface.
+
+```python
+from abc import ABC
+
+
+class CurrencyConverter(ABC):
+    def convert(self, from_currency, to_currency, amount) -> float:
+        pass
+
+
+class FXConverter(CurrencyConverter):
+    def convert(self, from_currency, to_currency, amount) -> float:
+        print('Converting currency using FX API')
+        print(f'{amount} {from_currency} = {amount * 1.2} {to_currency}')
+        return amount * 1.15
+
+
+class AlphaConverter(CurrencyConverter):
+    def convert(self, from_currency, to_currency, amount) -> float:
+        print('Converting currency using Alpha API')
+        print(f'{amount} {from_currency} = {amount * 1.2} {to_currency}')
+        return amount * 1.2
+
+
+class App:
+    def __init__(self, converter: CurrencyConverter):
+        self.converter = converter
+
+    def start(self):
+        self.converter.convert('EUR', 'USD', 100)
+
+
+if __name__ == '__main__':
+    converter = AlphaConverter()
+    app = App(converter)
+    app.start()
+```
+
+![image](https://user-images.githubusercontent.com/33947539/164886701-7589fcdb-af9b-48dc-bdb7-ce1a9e1a9a11.png)
+
+
 ## References:
 
 1. https://www.pythontutorial.net/python-oop/python-open-closed-principle/
