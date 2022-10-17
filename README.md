@@ -60,3 +60,4 @@ d. Write Junit
 
 ## References
 https://github.com/donnemartin/system-design-primer#object-oriented-design-interview-questions-with-solutions
+https://www.educative.io/blog/the-7-most-important-software-design-patterns
