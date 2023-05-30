@@ -307,6 +307,7 @@ if __name__ == '__main__':
 
 1. https://www.pythontutorial.net/python-oop/python-open-closed-principle/
 2. https://medium.com/@vubon.roy/solid-principles-with-python-examples-10e1f3d91259
+3. https://medium.com/@m.nusret.ozates/solid-principles-with-python-245e45f9b1f8
 
 
 
